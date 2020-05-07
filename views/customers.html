@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Customers</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+</head>
+
+<body>
+    <!-- navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">VBank</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Countries
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#countryModal"
+                            onclick="setAddCountry()">Add
+                            Country</a>
+                        <a class="dropdown-item" href="#">Manage Countries Data</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Statistices</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Customers
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#customerModal"
+                            onclick="setAddCustomer()">Add
+                            Customer</a>
+                        <a class="dropdown-item" href="#">Manage Customer Data</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Statistices</a>
+                    </div>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
+    <!-- end of navbar -->
+    <div class="container">
+        <h1 class="text-center">Our Customers</h1>
+        <div data-bind="foreach:customersData">
+            <div class="country">
+                <div class="alert alert-primary overflow-hidden">
+                    <h3 class="float-left">Country: <span data-bind="text:country"></span></h3>
+                    <div class="float-right text-right mt-1">
+                        <a href="#" class="btn btn-success" data-target="#countryModal" data-toggle="modal"
+                            data-bind="click:setEditCountry(_id, country)">Edit</a>
+                        <a href="#" class="btn btn-danger" data-target="#removeModal" data-toggle="modal"
+                            data-bind="click:setRemove('country', _id)">Delete</a>
+                    </div>
+                </div>
+
+                <div class="card-columns" data-bind="foreach:customers">
+                    <div class="card customer border-danger">
+                        <img width="300" data-bind="attr:{src:image}" height="300" class="card-img-top"
+                            alt="customer Image">
+                        <div class="card-body">
+                            <span class="badge badge-secondary" data-bind="text:title"></span>
+                            <h5 class="card-title text-capitalize" data-bind="text:custName"></h5>
+                            <p class="card-text">
+                                <button class="btn btn-primary d-block mb-2">
+                                    Call <span class="badge badge-light">
+                                        <a data-bind="attr:{href:'tel'+phone}, text:phone"></a>
+                                    </span>
+                                </button>
+                                <button class="btn btn-primary">
+                                    Mail <span class="badge badge-light">
+                                        <a data-bind="attr:{href:'mailto'+email}, text:email"></a>
+                                    </span>
+                                </button>
+                            </p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="#" class="btn btn-info">Details</a>
+                            <a href="#" class="btn btn-success" data-toggle="modal" data-target="#customerModal"
+                                data-bind="click:setEditCustomer(_id, custNo, custName, title, phone, email, gender, $parent._id)">Edit</a>
+                            <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#removeModal"
+                                data-bind="click:setRemove('customer', _id, $parent._id)">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- add country Modal -->
+    <div class="modal fade" id="countryModal" tabindex="-1" role="dialog" aria-labelledby="countryModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="countryModalLabel"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="countryForm" action="countryCustomers/createCountry" method="POST">
+                    <div class="modal-body">
+                        <input id="operationType" type="text" value="add" />
+                        <input id="countryId" type="text" />
+                        <label for="notes">Country Name:</label>
+                        <input type="text" name="country" id="country" class="form-control"
+                            placeholder="Enter Country Name" />
+                        <small id="msg" class="form-text text-muted"></small>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <input type="submit" class="btn btn-primary" value="Save" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- end of modal -->
+
+
+
+    <!-- customer Modal -->
+    <div class="modal fade" id="customerModal" tabindex="-1" role="dialog" aria-labelledby="customerModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="customerModalLabel"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="customerForm" action="" method="POST" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <input type="text" id="cOperationType" name="cOperationType" />
+                        <input type="text" id="customerId" name="customerId" />
+                        <br>
+                        <label for="customerCountry">Country:</label>
+                        <select id="customerCountry" name="customerCountry" class="form-control"
+                            data-bind="foreach:customersData">
+                            <option data-bind="value: _id, text:country"></option>
+                        </select>
+                        <label for="title">Title:</label>
+                        <select name="title" id="title" class="form-control">
+                            <option disabled selected>Select Title</option>
+                            <option value="Mr">Mr</option>
+                            <option value="Prof">Prof</option>
+                            <option value="Dr">Dr</option>
+                            <option value="Eng">Eng</option>
+                            <option value="Mrs">Mrs</option>
+                        </select>
+                        <label for="custNo">Customer Number:</label>
+                        <input type="number" name="custNo" id="custNo" class="form-control"
+                            placeholder="Enter Customer Number" />
+
+                        <label for="custName">Customer Name:</label>
+                        <input type="text" name="custName" id="custName" class="form-control"
+                            placeholder="Enter Customer Name" />
+                        <label for="phone">Customer Phone:</label>
+                        <input type="text" name="phone" id="phone" class="form-control"
+                            placeholder="Enter Customer Phone" />
+                        <label for="email">Customer Email:</label>
+                        <input type="email" name="email" id="email" class="form-control"
+                            placeholder="Enter Customer Email" />
+                        <label for="image">Customer Image:</label>
+                        <input type="file" name="image" id="image" class="form-control" />
+                        <label for="gender">Customer Gender:</label>
+                        <input type="radio" name="gender" id="gender" value="M" /> Male
+                        <input type="radio" name="gender" value="F" id="gender" /> Female
+                        <small id="custMsg" class="form-text text-muted"></small>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <input type="submit" class="btn btn-primary" value="Save" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- end of modal -->
+
+
+    <!-- remove Modal -->
+    <div class="modal fade" id="removeModal" tabindex="-1" role="dialog" aria-labelledby="removeModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="removeModalLabel">Remove Record</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="deleteEntry" action="" method="POST">
+                    <div class="modal-body">
+                        Are You Sure?
+                        <input type="hidden" name="deleteType" id="deleteType" />
+                        <input type="hidden" name="deleteId" id="deleteId" />
+                        <input type="hidden" name="parentId" id="parentId" />
+                        <small id="removeMsg" class="form-text text-muted"></small>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <input type="submit" class="btn btn-danger" value="Yes, Remove" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- end of modal -->
+
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/popper.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/knockout.js"></script>
+    <script src="../viewModels/customerVM.js"></script>
+</body>
+
+</html>

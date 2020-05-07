@@ -1,0 +1,122 @@
+{
+    "customersData":[
+        {
+            "country": "Egypt",
+            "customers": [
+                { 
+                    "custNo": "101010",
+                    "custName": "abdualla ahmed",
+                    "title": "Eng",
+                    "email":"abdualla@gmail.com",
+                    "phone":"0123856789",
+                    "gender":"M",
+                    "custImg": "../imgs/1.png",
+                    "blocked": false
+                },
+                { 
+                    "custNo": "101010",
+                    "custName": "hazem mahmoud",
+                    "title": "Eng",
+                    "email":"hazem@gmail.com",
+                    "phone":"0103496789",
+                    "gender":"M",
+                    "custImg": "../imgs/2.png",
+                    "blocked": false
+                },
+                { 
+                    "custNo": "101010",
+                    "custName": "mohamed montaser",
+                    "title": "Prof",
+                    "email":"mohamed@gmail.com",
+                    "phone":"0103456789",
+                    "gender":"M",
+                    "custImg": "../imgs/3.png",
+                    "blocked": false
+                },
+                {
+                    "custNo": "101010",
+                    "custName": "bahaa samir",
+                    "title": "Mr",
+                    "email": "bahaa@gmail.com",
+                    "phone": "012345534789",
+                    "gender": "M",
+                    "custImg": "../imgs/10.png",
+                    "blocked": false
+                }
+            ]
+        },
+        {
+            "country": "Saudi Arabia",
+            "customers": [
+                {
+                    "custNo": "101010",
+                    "custName": "ibraheem montaser",
+                    "title": "Dr",
+                    "email": "ibraheem@gmail.com",
+                    "phone": "0123490789",
+                    "gender": "M",
+                    "custImg": "../imgs/4.jpg",
+                    "blocked": false
+                },
+                {
+                    "custNo": "101010",
+                    "custName": "salem naser",
+                    "title": "Mr",
+                    "email": "salem@gmail.com",
+                    "phone": "0155555559",
+                    "gender": "M",
+                    "custImg": "../imgs/5.png",
+                    "blocked": false
+                },
+                {
+                    "custNo": "101010",
+                    "custName": "bassem mohamed",
+                    "title": "Eng",
+                    "email": "bassem@gmail.com",
+                    "phone": "0122222289",
+                    "gender": "M",
+                    "custImg": "../imgs/6.png",
+                    "blocked": false
+                }
+            ]
+        },
+        {
+            "country": "Syria",
+            "customers": [
+                {
+                    "custNo": "101010",
+                    "custName": "yousef ahmed",
+                    "title": "Mr",
+                    "email": "yousef@gmail.com",
+                    "phone": "0111156789",
+                    "gender": "M",
+                    "custImg": "../imgs/7.png",
+                    "blocked": false
+                },
+                {
+                    "custNo": "101010",
+                    "custName": "esaam ibraheem",
+                    "title": "Mr",
+                    "email": "esaam@gmail.com",
+                    "phone": "01223226789",
+                    "gender": "M",
+                    "custImg": "../imgs/8.jpg",
+                    "blocked": false
+                },
+                {
+                    "custNo": "101010",
+                    "custName": "mahmoud montaser",
+                    "title": "Dr",
+                    "email": "mahmoud@gmail.com",
+                    "phone": "0653456789",
+                    "gender": "M",
+                    "custImg": "../imgs/9.jpg",
+                    "blocked": false
+                }
+            ]
+        }
+    ]
+}
+
+
+
